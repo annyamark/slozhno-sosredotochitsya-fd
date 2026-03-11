@@ -1,5 +1,475 @@
 /* Основные стили проекта. Это стили для темы, которую вы верстаете первой. */
+/* сохраните в разметке и стилях класс page у тега body. Он удобен, чтобы составлять селекторы для разных цветовых тем. */
 
+/* ==================================================== ОБЩИЕ СТИЛИ ===================================================*/
 .page {
-  /* сохраните в разметке и стилях класс page у тега body. Он удобен, чтобы составлять селекторы для разных цветовых тем. */
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto;
+  min-height: 100vh;
+  font-family: "IBM Plex Mono", monospace, sans-serif;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  position: relative;
+}
+
+/* =============================================== МЕДИАЗАПРОСЫ ДЛЯ АВТОМАТИЧЕСКОЙ ТЕМЫ ======================================== */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-image: var(--bg-light);
+    --text-color: #353430;
+    --bg-color: #FFF1F7;
+    --accent-color: #353430;
+    --accent-bg-color: #FF8DCB;
+    --title-color: #FFC2E6;
+    --shadow-color: #FF8DCB;
+    --rec-visibility: hidden;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-image: var(--bg-dark);
+    --text-color: #F1B2CE;
+    --bg-color: #000028;
+    --accent-color: #FF0070;
+    --accent-bg-color: #FF0070;
+    --title-color: #DB00FF;
+    --shadow-color: #FF0070;
+    --rec-visibility: block;
+  }
+}
+
+/* ==================================================== УГОЛКИ =====================================================*/
+.decorated-zone {
+  position: relative;
+}
+
+/* общие стили для обоих уголков */
+.decorated-zone::before,
+.decorated-zone::after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border: 1px solid var(--accent-color);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* правый верхний уголок*/
+.decorated-zone::before {
+  top: var(--spacing-small);
+  right: var(--spacing-small);
+  border-bottom: none;
+  border-left: none;
+}
+
+/* левый нижний уголок */
+.decorated-zone::after {
+  bottom: var(--spacing-small);
+  left: var(--spacing-small);
+  border-top: none;
+  border-right: none;
+}
+
+/* ==================================================== ШАПКА ======================================================*/
+.header {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto 1fr 1fr 1fr 1fr;
+  height: 100vh;
+  min-height: 668px;
+  padding: var(--spacing-small);
+  position: relative;
+  isolation: isolate;
+  background-image: var(--bg-image);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  grid-row: 1;
+}
+
+/* REC */
+.header__decorative-rec {
+  visibility: var(--rec-visibility);
+  position: absolute;
+  top: var(--spacing-medium);
+  right: var(--spacing-medium);
+  color: var(--accent-color);
+  text-transform: uppercase;
+  z-index: 11;
+}
+/* точка у REC */
+.header__decorative-rec::after {           
+  content: "";                              
+  display: inline-block;
+  width: 9px; height: 9px;                    
+  margin-left: var(--spacing-small);
+  background-color: var(--accent-color);
+  border-radius: 50%;
+  box-shadow: 0 0 4px 2px var(--accent-color); 
+}
+
+/* меню*/
+.header__theme-menu {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: end;
+  align-self: center;
+  margin-top: 10px;
+  margin-right: 18px;
+}
+
+/* стили для кнопок меню */
+.header__theme-menu-button {
+  background: transparent;
+  border: none;
+  color: var(--accent-color);
+  font-family: "IBM Plex Mono", monospace, sans-serif;
+  font-size: var(--font-size-base);
+  padding: 4px 12px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  outline: none;
+}
+
+/* убираем стандартные стили кнопок */
+.header__theme-menu-button:hover {
+  opacity: 0.8;
+  border: none;
+}
+
+.header__theme-menu-button:focus-visible {
+  outline: 1px solid var(--accent-color);
+  border: none;
+}
+
+/* активная кнопка*/
+.header__theme-menu-button_active {
+  pointer-events: none;
+  border: none;
+  outline: 1px solid var(--accent-color);
+}
+
+.header__title {
+  grid-column: 1 / -1;
+  grid-row: 3 / 5;
+  align-self: center;
+  font-size: clamp(7.25rem, 7.0115rem + 1.0178vw, 7.5rem);
+  line-height: 0.95;
+  word-break: break-word;
+  color: var(--title-color);
+  text-shadow: 4px 4px 0 var(--shadow-color);
+}
+
+.header__title span {
+  display: block;
+}
+
+/* абзац */
+.title {
+  grid-column: 1 / -1;
+  grid-row: 5;
+  align-self: center;
+  justify-self: end;
+  margin-bottom: 31px;
+  background-color: var(--accent-bg-color);
+  color: var(--title-decor-text);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-base);
+  line-height: 23.4px;
+  padding: 0 10px;
+  display: inline-block;
+}
+
+/* ==================================================== ЗАГОЛОВКИ СЕКЦИЙ ===========================================*/
+.main {
+  grid-row: 2;
+}
+
+.section__title {
+  margin-bottom: var(--spacing-small);
+  font-size: var(--font-size-base);
+  color: var(--accent-color);
+  font-weight: var(--font-weight-bold);
+  background: transparent;
+  width: 100%;
+}
+
+.section__subtitle {
+  margin: 0;
+  color: var(--text-color);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-base);
+  line-height: 1.3;
+  width: 100%;
+
+}
+
+h2 {
+  color: var(--accent-color);
+  background: transparent;
+  font-weight: var(--font-weight-bold);
+  margin: 0 0 var(--spacing-small) 0;
+}
+
+.section__subtitle__advise {
+  margin: 0;
+  color: var(--text-color);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-base);
+  line-height: 1.3;
+  width: 100%;
+}
+
+/* ==================================================== ПОДЛОЖКА ===================================================*/
+.title-decor {
+  background-color: var(--accent-bg-color);
+  color: var(--title-decor-text);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-base);
+  line-height: 23.4px;
+  padding: 0 10px;
+  display: inline-block;
+}
+
+/* ==================================================== СЕКЦИИ =====================================================*/
+.section {
+  padding: 0 10px;
+  margin-bottom: var(--spacing-large);
+}
+
+.section__content {
+  display: grid;
+  gap: 20px;
+}
+
+/* ==================================================== ГАЛЕРЕЯ ====================================================*/
+.gallery {
+  display: grid;
+  gap: var(--spacing-medium);
+  margin-top: var(--spacing-medium);
+}
+
+.gallery__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ==================================================== ССЫЛКИ =====================================================*/
+.link {
+  color: inherit;
+  text-decoration: none;
+  text-shadow: 2px 2px 0 var(--shadow-color);
+  font-weight: var(--font-weight-normal);
+  transition: opacity 0.3s ease;
+}
+
+.link:hover {
+  border-bottom: 1px solid currentColor;
+}
+
+.link:focus-visible {
+  outline: none;
+  border: 1px solid currentColor;
+  padding: 2px 4px;
+}
+
+/* ==================================================== ФУТЕР ======================================================*/
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  min-height: 668px;
+  padding: var(--spacing-medium);
+  text-align: center;
+  grid-row: 3;
+}
+
+.footer__title {
+  font-family: "IBM Plex Mono", monospace, sans-serif;
+  font-weight: var(--font-weight-bold);
+  font-size: clamp(7.5rem, 0.5625rem + 14.4531vw, 9.8125rem);
+  line-height: 83%;
+  color: var(--title-color);
+  text-shadow: 4px 4px 0 var(--shadow-color);
+}
+
+/*==================================== НА ПЛАНШЕТ ================================================================*/
+@media (min-width: 768px) {
+  .page{
+    grid-template-columns: 236px 20px 108px 364px;
+    grid-template-rows: auto auto auto;
+    padding: var(--spacing-medium);
+    display: grid;
+  }
+
+  .header {
+    grid-row: 1;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+  }
+
+  .header__theme-menu {
+    grid-template-columns: subgrid;
+    grid-column: 4;
+  }
+  .main {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+  }
+
+  .footer {
+    grid-row: 3;
+    grid-column: 1 / -1;
+  }
+
+  .title {
+    grid-column: 4;
+  }
+
+  .header__title span {
+    display: inline;
+  }
+
+  .section {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+    padding: 0;
+    margin-bottom: var(--spacing-large);
+  }
+
+  .section__title {
+    grid-column: 1 / 2;
+    margin-bottom: 0;
+    padding-right: 20px;
+  }
+
+  .section__content {
+    grid-column: 2 / -1; 
+   display: grid;
+    gap: 20px;
+  }
+
+  .title-decor {
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
+  }
+
+  .section-warning {
+    grid-column: 1 / -1;
+  }
+
+  .gallery {
+  grid-column: 1 / -1;
+    gap: var(--spacing-medium);
+    margin-top: var(--spacing-medium);
+  }
+  
+  .gallery__image:nth-child(1) {
+    grid-column: span 2;
+    grid-row: 1;
+  }
+  
+  .gallery__image:nth-child(2) {
+    grid-column: 3;
+    grid-row: span 2;
+  }
+  
+  .gallery__image:nth-child(3) {
+    grid-column: 1;
+    grid-row: 2 / 4;
+  }
+  
+  .gallery__image:nth-child(4) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  
+  .gallery__image:nth-child(5) {
+    grid-column: 2 / 4;
+    grid-row: 3;
+  }
+}
+
+/*========================================= ДЕСКТОП ===============================================================*/
+
+@media (min-width: 1024px) {
+  .page {
+    grid-template-columns: 315px 20px 157px 158px 20px 314px;
+    grid-template-rows: auto auto auto;
+    padding: var(--spacing-medium);
+    display: grid;
+  }
+
+  .header {
+    grid-row: 1;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+    display: grid;
+  }
+
+  .header__theme-menu {
+   grid-column: 3 / 5; 
+    grid-row: 1;
+    justify-self: center;
+  }
+
+  .header__theme-menu-list {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .main {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+  }
+
+  .footer {
+    grid-row: 3;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+    display: grid;
+  }
+
+  .title {
+    grid-column: 4 / 7;
+  }
+
+  .footer__title {
+    grid-column: 1 / -1;
+  }
+
+  .section-warning {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+  }
+
+  .section-warning .section__title {
+    grid-column: 1 / 2;
+  }
+
+  .section-warning .section__content {
+    grid-column: 1 / -1; 
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .section-warning article {
+    flex: 1;
+    width: 100%;
+  }
 }
