@@ -1,11 +1,9 @@
 
 :root {
- /* Фоновые изображения */
+ /* Фоновое изображение */
   --bg-image: url("../images/cover-image-dark.png");
-  --bg-light: url("../images/cover-image-light.png");
-  --bg-dark: url("../images/cover-image-dark.png");
 
-  /* Цвета (значения по умолчанию - темная тема) */
+  /* Цвета по умолчанию */
   --text-color: #F1B2CE;
   --bg-color: #000028;
   --accent-color: #FF0070;
@@ -14,8 +12,10 @@
   --shadow-color: #FF0070;
   --rec-visibility: block;
   --title-decor-text: #000028;
+  --button-hover-color: 1px solid rgba(255, 0, 112, 0.4);
   
   /* Размеры текста */
+  --font-family: "IBM Plex Mono", monospace, sans-serif;
   --font-size-small: 14px;
   --font-size-base: 18px;
   --font-size-large: 24px;

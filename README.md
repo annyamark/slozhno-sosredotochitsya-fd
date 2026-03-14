@@ -37,4 +37,4 @@ project/
 │   ├── books.png
 │   └── street.png
 └── README.md
-Ссылка: git@github.com:annyamark/slozhno-sosredotochitsya-fd.git 
+Ссылка: git@github.com:annyamark/slozhno-sosredotochitsya-fd.git
