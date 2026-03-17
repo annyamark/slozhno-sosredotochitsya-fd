@@ -7,18 +7,13 @@
   grid-template-columns: 1fr;
   grid-template-rows: auto auto auto;
   min-height: 100vh;
+  max-width: 100%;
+  box-sizing: border-box;
   font-family: var(--font-family);
   color: var(--text-color);
   background-color: var(--bg-color);
   position: relative;
   background-attachment: fixed;
-}
-
-.page::before {
-  content: '';
-  position: fixed;
-  width: 100%;
-  height: 100%;
   background-image: var(--bg-image);
   background-size: cover;
   background-position: center;
@@ -64,17 +59,14 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr min-content 1fr;
-  min-height: 668px;
   max-width: 375px;
+  min-height: 668px;
   width: 100%;
-  margin-inline: center;
-  padding: var(--spacing-small);
+  height: 100vh;
+  margin-inline: auto;
+  padding-top: var(--spacing-small);
   position: relative;
   isolation: isolate;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  grid-row: 1;
 }
 
 /* REC */
@@ -166,13 +158,14 @@
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-base);
   line-height: 23.4px;
-  padding: 0 10px;
+  padding-bottom: 31px;
   display: inline-block;
 }
 
 /* ==================================================== ЗАГОЛОВКИ СЕКЦИЙ ===========================================*/
 .main {
   grid-row: 2;
+  margin-top: 40px;
 }
 
 .section__title {
